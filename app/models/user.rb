@@ -1,8 +1,11 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
-  validate :username, presence :true, length {min :6, max :12}
-  valid_email_regex = /^[a-zA-Z0-9.!#$%&'*+\/=​?^_`{|}~-]+@​[a-zA-Z0-9](?:​[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:​\.[a-zA-Z0-9](?:​[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
-  validate :email, presence :true length {min :6, max :50}, format {with :valid_email_regex}
-  uniqueness :true
+  validates :username, presence: true, length: { minimum: 6, maximum: 12 }
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
+  validates :email, presence: true, length: { maximum: 255 },
+                    format: { with: VALID_EMAIL_REGEX },
+                    uniqueness: { case_sensitive: false }
 
   has_many :posts
 end

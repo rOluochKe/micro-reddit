@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class Post < ApplicationRecord
-  validate :title, presence :true, length {min :6, max :100}
-  validate :description, presence :true, length {min :6, max :400}
+  validates :title, presence: true, length: { minimun: 6, maximum: 100 }
+  validates :description, presence: true, length: { minimum: 6, maximum: 400 }
 
   belongs_to :user
 end

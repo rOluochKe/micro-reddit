@@ -5,4 +5,5 @@ class Post < ApplicationRecord
   validates :description, presence: true, length: { minimum: 6, maximum: 400 }
 
   belongs_to :user
+  has_many :comments
 end
